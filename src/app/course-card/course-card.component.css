@@ -1,0 +1,35 @@
+.first-image {
+  border: 1px solid red;
+}
+
+.beginner {
+  background-color: #abf9918d;
+}
+
+.course-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px;
+}
+
+.course-tag {
+  padding: 5px;
+  text-transform: uppercase;
+  color: white;
+  height: 15px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.intermediate {
+  background-color: #ffe539d6;
+}
+
+.advanced {
+  background-color: #ff1c15;
+}
+
+.unknown {
+  background-color: #c0c0c0;
+}

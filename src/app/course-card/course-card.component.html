@@ -1,0 +1,56 @@
+<div class="course-card" [ngClass]="styleWithClasses()">
+  <div class="course-header">
+    <div class="course-title" [ngStyle]="style()">{{ course.description }}</div>
+    <!--<span class="course-tag" [ngClass]="getSpan()" [ngSwitch]="course.category">
+
+      <ng-container *ngSwitchCase="'BEGINNER'">Beginner</ng-container>
+      <ng-container *ngSwitchCase="'INTERMEDIATE'">Intermediate</ng-container>
+      <ng-container *ngSwitchCase="'ADVANCED'">Advanced</ng-container>
+      <ng-container *ngSwitchDefault>Unknown</ng-container>
+    </span>-->
+    <span class="course-tag" [ngClass]="getSpan()">
+      @switch (course.category) { @case('BEGINNER'){ Beginner }
+      @case('INTERMEDIATE'){ Intermediate } @case('ADVANCED'){ Advanced }
+      @default { Unknown } }
+    </span>
+  </div>
+  @if(course.id === 1){
+  <img
+    width="300"
+    alt="Angular Logo"
+    [src]="course.iconUrl"
+    class="first-image"
+  />
+  }@else if(course.id && course.iconUrl !== ""){
+  <img width="300" alt="Angular Logo" [src]="course.iconUrl" />
+  }@else {
+  <div>No image available</div>
+  }
+  <!--<img
+    width="300"
+    alt="Angular Logo"
+    [src]="course.iconUrl"
+    class="first-image"
+    *ngIf="course.id === 1"
+  />
+
+  <img
+    width="300"
+    alt="Angular Logo"
+    [src]="course.iconUrl"
+    *ngIf="
+      course.id && course.id !== 1 && course.iconUrl !== '';
+      else noImageAvailable
+    "
+  />
+
+  <ng-template #noImageAvailable>
+    <div>No image available</div>
+  </ng-template>-->
+
+  <div class="course-description">
+    {{ course.longDescription }}
+  </div>
+
+  <button (click)="clickButton()">Course Clicked</button>
+</div>
