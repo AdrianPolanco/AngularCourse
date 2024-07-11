@@ -9,6 +9,9 @@
 <!--<div style="text-align: center">Today is {{ today | date : "MM/dd/yyyy" }}</div>-->
 <!--<div style="text-align: center">Today is {{ today | date : "short" }}</div>-->
 <div style="text-align: center">
+  {{ quantityCourses }} courses available now!
+</div>
+<div style="text-align: center">
   Today is {{ today | date : "MMM/dd/yyyy" | uppercase }}
 </div>
 
@@ -16,20 +19,31 @@
   All courses starting from {{ 10.501 | currency : "USD" }}, with an offer of
   {{ 0.51 | percent }}
 </div>
-
-<div class="courses">
+<div style="text-align: center">
+  <button (click)="addCourse()">Add Course</button>
+</div>
+<div class="courses" #coursesRef>
   <!--Puedes crear una funcion que sirva para trackear el iterable, pero es preferible hacer el track por un id en vez de una funcion-->
-  @for (course of courses | slice; track trackCourse; let index = $index; let
-  count = $count; let first = $first; let last = $last; let even = $even; let
-  odd = $odd) {
+  @for (course of courses | slice; track trackCourse($index, course); let index
+  = $index; let count = $count; let first = $first; let last = $last; let even =
+  $even; let odd = $odd) {
   <!--Aplicar estilos condicionalmente a un componente hijo con [class.style]="condition"-->
+  @if(index == 2 || index == 3){
+  <course-card
+    #cardRef
+    [course]="course"
+    [class.is-first]="first"
+    [class.is-last]="last"
+    (courseSelected)="viewCourse($event)"
+  ></course-card>
+  }@else{
   <course-card
     [course]="course"
     [class.is-first]="first"
     [class.is-last]="last"
     (courseSelected)="viewCourse($event)"
   ></course-card>
-  }
+  } }
   <!--Si la lista esta vacía, se mostrara el contenido dentro de @empty-->
   @empty {
   <div class="no-courses">No courses available</div>
