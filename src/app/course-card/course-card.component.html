@@ -48,9 +48,9 @@
     <div>No image available</div>
   </ng-template>-->
 
-  <div class="course-description">
-    {{ course.longDescription }}
-  </div>
+  <!--<ng-content select="div.course-description"></ng-content>-->
+
+  <ng-content select="course-description" #description></ng-content>
 
   <button (click)="clickButton()">Course Clicked</button>
 </div>

@@ -1,4 +1,17 @@
-import { Component, EventEmitter, Input, Output } from "@angular/core";
+import {
+  AfterContentChecked,
+  AfterContentInit,
+  AfterViewInit,
+  Component,
+  ContentChild,
+  ContentChildren,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  QueryList,
+  ViewChild,
+} from "@angular/core";
 import { Course } from "../model/course";
 import { on } from "events";
 
@@ -14,6 +27,10 @@ export class CourseCardComponent {
   //Si se especifica un nombre en los parametros del @Output(), ese nombre sera el nombre del evento que se emitira
   //Si no se especifica nada, pues Angular tomara el nombre de la variable como el nombre del evento
   @Output("courseSelected") courseViewed = new EventEmitter<Course>();
+  //ContentChild es similar a ViewChild pero en lugar de buscar en el DOM del componente, busca en el contenido proyectado SOLAMENTE
+  //ViewChild no funciona en contenido proyectado con ng-content
+  @ContentChild("description") courseDescription: ElementRef;
+  @ContentChildren("description") courseDescriptions: QueryList<ElementRef>;
 
   styleWithClasses() {
     return { beginner: this.course.category === "BEGINNER" };
@@ -34,7 +51,7 @@ export class CourseCardComponent {
   }
 
   clickButton() {
-    // alert("Button clicked");
+    console.log(this.courseDescriptions);
     this.onCourseViewed(this.course);
   }
 

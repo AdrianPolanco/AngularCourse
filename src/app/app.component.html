@@ -35,14 +35,27 @@
     [class.is-first]="first"
     [class.is-last]="last"
     (courseSelected)="viewCourse($event)"
-  ></course-card>
+  >
+    <div class="course-description" ngProjectAs="course-description">
+      {{ course.longDescription }}
+    </div></course-card
+  >
   }@else{
   <course-card
     [course]="course"
     [class.is-first]="first"
     [class.is-last]="last"
     (courseSelected)="viewCourse($event)"
-  ></course-card>
+  >
+    <div ngProjectAs="course-description" #description>
+      {{ course.longDescription }}
+    </div>
+    <!--<div ngProjectAs="course-description" #description>
+      {{ course.longDescription }}
+    </div><div ngProjectAs="course-description" #description>
+      {{ course.longDescription }}
+    </div>--></course-card
+  >
   } }
   <!--Si la lista esta vacía, se mostrara el contenido dentro de @empty-->
   @empty {
