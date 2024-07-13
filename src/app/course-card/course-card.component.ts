@@ -10,6 +10,7 @@ import {
   Input,
   Output,
   QueryList,
+  TemplateRef,
   ViewChild,
 } from "@angular/core";
 import { Course } from "../model/course";
@@ -31,6 +32,8 @@ export class CourseCardComponent {
   //ViewChild no funciona en contenido proyectado con ng-content
   @ContentChild("description") courseDescription: ElementRef;
   @ContentChildren("description") courseDescriptions: QueryList<ElementRef>;
+
+  @Input() defaultImageTpl: TemplateRef<any>;
 
   styleWithClasses() {
     return { beginner: this.course.category === "BEGINNER" };

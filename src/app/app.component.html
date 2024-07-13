@@ -14,7 +14,25 @@
 <div style="text-align: center">
   Today is {{ today | date : "MMM/dd/yyyy" | uppercase }}
 </div>
-
+<ng-template
+  #defaultImage
+  let-courseName="description"
+  let-lessonsCount="lessonsCount"
+>
+  <!--Especificando argumentos al ngTemplate para llamarlos posteriormente en la propiedad context-->
+  <!--Al parecer, la sintaxis es let-nombrePropiedad, donde nombrePropiedad debe tener exactamente el mismo nombre
+  que la propiedad a la que hace referencia, sin todo esto, no funcionará-->
+  <img
+    src="../../assets/empty-image.png"
+    width="300"
+    alt="Empty image"
+    style="display: block; width: 100%; margin-bottom: 10px"
+  />
+  <span
+    >No image provided for course {{ courseName }} with
+    {{ lessonsCount }} lessons</span
+  >
+</ng-template>
 <div style="text-align: center">
   All courses starting from {{ 10.501 | currency : "USD" }}, with an offer of
   {{ 0.51 | percent }}
@@ -35,6 +53,7 @@
     [class.is-first]="first"
     [class.is-last]="last"
     (courseSelected)="viewCourse($event)"
+    [defaultImageTpl]="defaultImage"
   >
     <div class="course-description" ngProjectAs="course-description">
       {{ course.longDescription }}
@@ -46,6 +65,7 @@
     [class.is-first]="first"
     [class.is-last]="last"
     (courseSelected)="viewCourse($event)"
+    [defaultImageTpl]="defaultImage"
   >
     <div ngProjectAs="course-description" #description>
       {{ course.longDescription }}

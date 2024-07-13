@@ -14,6 +14,7 @@
       @default { Unknown } }
     </span>
   </div>
+
   @if(course.id === 1){
   <img
     width="300"
@@ -23,8 +24,21 @@
   />
   }@else if(course.id && course.iconUrl !== ""){
   <img width="300" alt="Angular Logo" [src]="course.iconUrl" />
-  }@else {
-  <div>No image available</div>
+  }@else if(course.iconUrl === ""){
+  <!--Haciendo referencia a un ng-template-->
+  <!--En caso dde que el ngTemplate este siendo pasado desde un componente padre, hacemos referencia al nombre del campo
+  que lo esta recibiendo (el campo de tipo TemplateRef) en lugar del nombre de la referencia original-->
+  <ng-container
+    *ngTemplateOutlet="
+      defaultImageTpl;
+      context: {
+        description: course.description,
+        lessonsCount: course.lessonsCount
+      }
+    "
+  >
+    <!--Instanciando el ngTemplate, el primer argumento es la referencia al ngTemplate, y el segundo argumento, context, ya son los argumentos que recibe el ngTemplate-->
+  </ng-container>
   }
   <!--<img
     width="300"
